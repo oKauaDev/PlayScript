@@ -40,9 +40,8 @@ class PlayScriptCommand extends Command {
         if ($args[0] == "list") {
             $message = "§cFile List:";
             foreach(new FilesystemIterator($this->plugin->getDataFolder() . "scripts") as $file) {
-            	if($file->getExtension() === "php"){ // Check only for PHP
+            	if($file->getExtension() === "php"){
 					$filesize = $this->plugin->convertBytes($file->getSize());
-					// Check for file size only B, KB, MB
 					if($filesize !== null){
                 		$message .= "\n§c - " . $file->getFilename() . " §a(" . $filesize . ")";
                 	}
@@ -51,23 +50,22 @@ class PlayScriptCommand extends Command {
             $sender->sendMessage($message);
             return;
         }
+
+        if(!strpos($args[0], ".php")){
+        	$args[0] = $args[0] . ".php";
+        }
+
         if (!file_exists($this->plugin->getDataFolder() . "scripts/" . $args[0])) {
             $sender->sendMessage("§cFile " . $args[0] . " Does not found in Path Scripts!");
             return;
         }
         
-        if(!strpos($args[0], ".php")){
-        	$sender->sendMessage("§cPlease input PHP File name!");
-        	return;
-        }
-        
         $fsize = $this->plugin->convertBytes(filesize($this->plugin->getDataFolder() . "scripts/" . $args[0]));
-		// Check for file size only B, KB, MB
 		if($fsize === null){
 			$sender->sendMessage("§cFile size is too bigger!, Only B, KB, MB Accepted!");
 			return;
 		}
-		
         $this->plugin->executeScript($args[0]);
+        $sender->sendMessage("§aFile " . $args[0] . " successfully executed!");
     }
 }
