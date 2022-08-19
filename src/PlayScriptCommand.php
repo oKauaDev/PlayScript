@@ -41,10 +41,10 @@ class PlayScriptCommand extends Command {
             $message = "§cFile List:";
             foreach(new FilesystemIterator($this->plugin->getDataFolder() . "scripts") as $file) {
             	if($file->getExtension() === "php"){
-					$filesize = $this->plugin->convertBytes($file->getSize());
-					if($filesize !== null){
-                		$message .= "\n§c - " . $file->getFilename() . " §a(" . $filesize . ")";
-                	}
+		    $filesize = $this->plugin->convertBytes($file->getSize());
+		    if($filesize !== null){
+		      $message .= "\n§c - " . $file->getFilename() . " §a(" . $filesize . ")";
+		    }
                 }
             }
             $sender->sendMessage($message);
@@ -61,10 +61,10 @@ class PlayScriptCommand extends Command {
         }
         
         $fsize = $this->plugin->convertBytes(filesize($this->plugin->getDataFolder() . "scripts/" . $args[0]));
-		if($fsize === null){
-			$sender->sendMessage("§cFile size is too bigger!, Only B, KB, MB Accepted!");
-			return;
-		}
+	if($fsize === null){
+	    $sender->sendMessage("§cFile size is too bigger!, Only B, KB, MB Accepted!");
+	    return;
+	}
         $this->plugin->executeScript($args[0]);
         $sender->sendMessage("§aFile " . $args[0] . " successfully executed!");
     }
