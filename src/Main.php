@@ -39,14 +39,14 @@ class Main extends PluginBase{
     /**
     * @param int $size
     * @return string|null
-	*/
-	public function convertBytes(int $size): ?String
-	{
-  	    $prefix = ["B", "KB", "MB"];
-   	    $format = $size > 0 ? floor(log($size, 1024)) : 0;
-   	    if(!isset($prefix[$format])){
-   		    return null;
-   	    }
-    	    return number_format($size / pow(1024, $format), 2, ".", ",") . " " . $prefix[$format];
+    */
+    public function convertBytes(int $size): ?String
+    {
+	$prefix = ["B", "KB", "MB"];
+   	$format = $size > 0 ? floor(log($size, 1024)) : 0;
+   	if(!isset($prefix[$format])){
+		return null;
 	}
+	return number_format($size / pow(1024, $format), 2, ".", ",") . " " . $prefix[$format];
+    }
 }
