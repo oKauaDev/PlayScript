@@ -47,6 +47,6 @@ class Main extends PluginBase{
    	    if(!isset($prefix[$format])){
    		    return null;
    	    }
-    	return number_format($size / pow(1024, $format), 2, ".", ",") . " " . $prefix[$format];
+    	    return number_format($size / pow(1024, $format), 2, ".", ",") . " " . $prefix[$format];
 	}
 }
